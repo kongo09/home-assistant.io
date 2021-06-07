@@ -20,7 +20,9 @@ ha_platforms:
   - cover
   - fan
   - light
+  - scene
   - switch
+ha_dhcp: true
 ---
 
 The `tuya` integration is the main integration to integrate [Tuya Smart](https://www.tuya.com) related platforms, except the Zigbee hub. This includes devices linked with the Tuya, Smart Life, and Jinvoo Smart apps. You will need your account information (username, password and account country code) from one of these apps to discover and control devices which related to your account.

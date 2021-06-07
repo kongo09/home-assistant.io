@@ -32,7 +32,6 @@ This Hive integration uses the same username and password you use on the [Hive w
 
 {% include integrations/config_flow.md %}
 
-
 ## Options
 
 Menu: *Configuration* > *Integrations* > *Select your new integration* > *Press the options button*
@@ -41,9 +40,9 @@ Menu: *Configuration* > *Integrations* > *Select your new integration* > *Press 
   
 ## Services
 
-### Service `hive.boost_heating`
+### Service `hive.boost_heating_on`
 
-You can use the service `hive.boost_heating` to set your heating to boost for a period of time at a certain target temperature". Individual TRVs can also be boosted in the same way, using this service.
+You can use the service `hive.boost_heating_on` to set your heating to boost for a period of time at a certain target temperature". Individual TRVs can also be boosted in the same way, using this service.
 
 | Service data attribute | Optional | Description                                                            |
 | ---------------------- | -------- | ---------------------------------------------------------------------- |
@@ -58,12 +57,32 @@ Examples:
 script:
   boost_heating:
     sequence:
-      - service: hive.boost_heating
+      - service: hive.boost_heating_on
         target:
           entity_id: "climate.heating"
         data:
           time_period: "01:30:00"
           temperature: "20.5"
+```
+
+### Service `hive.boost_heating_off`
+
+You can use the service `hive.boost_heating_off` to set your heating to boost for a period of time at a certain target temperature". Individual TRVs can also be boosted in the same way, using this service.
+
+| Service data attribute | Optional | Description                                    |
+| ---------------------- | -------- | ---------------------------------------------- |
+| `entity_id`            | no       | String, Name of entity e.g., `climate.heating` |
+
+Examples:
+
+```yaml
+# Example script to boost heating, boost period and target temperature specified.
+script:
+  boost_heating:
+    sequence:
+      - service: hive.boost_heating_off
+        target:
+          entity_id: "climate.heating"
 ```
 
 ### Service `hive.boost_hot_water`
@@ -145,6 +164,7 @@ The `hive` switch platform integrates your Hive plugs into Home Assistant, enabl
 The platform supports the following Hive products:
 
 - Hive Active Plug
+- Hive Heat on Demand
 
 ### Water Heater
 

@@ -101,6 +101,11 @@ device:
       description: 'Identifier of a device that routes messages between this device and Home Assistant. Examples of such devices are hubs, or parent devices of a sub-device. This is used to show device topology in Home Assistant.'
       required: false
       type: string
+enabled_by_default:
+  description: Flag which defines if the entity should be enabled when first added.
+  required: false
+  type: boolean
+  default: true
 icon:
   description: "[Icon](/docs/configuration/customizing-devices/#icon) for the entity."
   required: false
@@ -119,7 +124,7 @@ name:
   type: string
   default: MQTT Fan
 optimistic:
-  description: Flag that defines if lock works in optimistic mode
+  description: Flag that defines if fan works in optimistic mode
   required: false
   type: boolean
   default: "`true` if no state topic defined, else `false`."
@@ -169,6 +174,16 @@ payload_oscillation_on:
   required: false
   type: string
   default: oscillate_on
+payload_reset_percentage:
+  description: A special payload that resets the `percentage` state attribute to `None` when received at the `percentage_state_topic`.
+  required: false
+  type: string
+  default: 'None'
+payload_reset_preset_mode:
+  description: A special payload that resets the `preset_mode` state attribute to `None` when received at the `preset_mode_state_topic`.
+  required: false
+  type: string
+  default: 'None'
 percentage_command_template:
   description: Defines a [template](/docs/configuration/templating/#processing-incoming-data) to generate the payload to send to `percentage_command_topic`.
   required: false
@@ -266,8 +281,8 @@ fan:
     oscillation_command_topic: "bedroom_fan/oscillation/set"
     percentage_state_topic: "bedroom_fan/speed/percentage_state"
     percentage_command_topic: "bedroom_fan/speed/percentage"
-    preset_mode_state_topic: "bedroom_fan/speed/preset_mode_state"
-    preset_mode_command_topic: "bedroom_fan/speed/preset_mode"
+    preset_mode_state_topic: "bedroom_fan/preset/preset_mode_state"
+    preset_mode_command_topic: "bedroom_fan/preset/preset_mode"
     preset_modes:
        -  "auto"
        -  "smart"
@@ -299,7 +314,7 @@ fan:
     oscillation_command_template: "{ oscillation: '{{ value }}'}"
     percentage_command_topic: "bedroom_fan/speed/percentage"
     percentage_command_template: "{ percentage: '{{ value }}'}"
-    preset_mode_command_topic: "bedroom_fan/speed/preset_mode"
+    preset_mode_command_topic: "bedroom_fan/preset/preset_mode"
     preset_mode_command_template: "{ preset_mode: '{{ value }}'}"
     preset_modes:
        -  "auto"

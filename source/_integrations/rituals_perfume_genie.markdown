@@ -6,10 +6,14 @@ ha_config_flow: true
 ha_release: 2021.3
 ha_category:
   - Switch
+  - Sensor
+  - Binary Sensor
 ha_codeowners:
   - '@milanmeu'
 ha_domain: rituals_perfume_genie
 ha_platforms:
+  - binary_sensor
+  - sensor
   - switch
 ---
 

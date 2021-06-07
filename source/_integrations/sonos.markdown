@@ -3,6 +3,7 @@ title: Sonos
 description: Instructions on how to integrate Sonos devices into Home Assistant.
 ha_category:
   - Media Player
+  - Sensor
 featured: true
 ha_release: 0.7.3
 ha_iot_class: Local Push
@@ -10,12 +11,34 @@ ha_config_flow: true
 ha_domain: sonos
 ha_codeowners:
   - '@cgtobi'
+  - '@jjlawren'
 ha_ssdp: true
+ha_platforms:
+  - binary_sensor
+  - media_player
+  - sensor
+  - switch
 ---
 
 The `sonos` integration allows you to control your [Sonos](https://www.sonos.com) wireless speakers from Home Assistant. It also works with IKEA Symfonisk speakers.
 
 {% include integrations/config_flow.md %}
+
+## Battery support
+
+Battery sensors are fully supported for the `Sonos Roam` and `Sonos Move` devices on S2 firmware. `Sonos Move` speakers still on S1 firmware are supported but may update infrequently.
+
+For each speaker with a battery, a `sensor` showing the current battery charge level and a `binary_sensor` showing the power state of the speaker are created. The `binary_sensor` reports if the speaker is currently powered by an external source and its `power_source` attribute shows which specific source is providing the current power. This source attribute can be one of `BATTERY`, `SONOS_CHARGING_RING` if using wireless charging, or `USB_POWER` if charging via USB cable. Note that the Roam will report `SONOS_CHARGING_RING` even when using a generic Qi charger.
+
+<div class='note'>
+
+The battery sensors rely on working change events or updates will be delayed. S1 battery sensors **require** working events to report any data. See more details in [Advanced use](#advanced-use). 
+
+</div>
+
+## Alarm support
+
+The Sonos integration adds one `switch` for each alarm set in the Sonos app. The alarm switches are detected, deleted and assigned automatically and come with several attributes that help to monitor Sonos alarms.
 
 ## Services
 
@@ -111,6 +134,7 @@ Night Sound and Speech Enhancement modes are only supported when playing from th
 | Service data attribute | Optional | Description |
 | ---------------------- | -------- | ----------- |
 | `entity_id` | yes | String or list of `entity_id`s that will have their options set.
+| `buttons_enabled` | yes | Boolean to control the functioning of hardware buttons on the device.
 | `night_sound` | yes | Boolean to control Night Sound mode.
 | `speech_enhance` | yes | Boolean to control Speech Enhancement mode.
 | `status_light` | yes | Boolean to control the Status (LED) Light.

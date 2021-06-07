@@ -6,7 +6,6 @@ ha_category:
 ha_release: 0.7
 ha_quality_scale: internal
 ha_domain: sensor
-ha_iot_class:
 ---
 
 Sensors are a basic platform component in Home Assistant. They monitor the states and conditions of a variety of entities. An entity can be many things. This can include a physical device like a motion sensor that reports the battery level, a web service that retrieves the weather temperature, a built-in function that calculates the sun's elevation relative to your GPS position, or even a custom sensor you may have created to report the free space on your laptop. These are all *things* reporting different types of information.
@@ -30,6 +29,8 @@ The type of data a sensor returns impacts how it is displayed in the frontend. T
 - **pressure**: Pressure in hPa or mbar.
 - **timestamp**: Datetime object or timestamp string (ISO 8601).
 - **voltage**: Voltage in V.
+- **carbon_monoxide**: Carbon Monoxide in CO (Gas CNG/LPG)
+- **carbon_dioxide**: Carbon Dioxide in CO2 (Smoke)
 
 <p class='img'>
 <img src='/images/screenshots/sensor_device_classes_icons.png' />

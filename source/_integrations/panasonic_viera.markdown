@@ -9,10 +9,11 @@ ha_iot_class: Local Polling
 ha_domain: panasonic_viera
 ha_config_flow: true
 ha_platforms:
+  - media_player
   - remote
 ---
 
-The `panasonic_viera` platform allows you to control a Panasonic Viera TV.
+The Panasonic Viera integration allows you to control a Panasonic Viera TV.
 
 There is currently support for the following device types within Home Assistant:
 
@@ -59,6 +60,10 @@ turn_on_action:
 When you restart Home Assistant, make sure the TV is turned on and connected to your local network. If your TV needs to be paired, you'll need to go to **Configuration > Integrations** to type the PIN code that will be displayed on it and finish the setup.
 
 ### Example `turn_on_action`
+
+This example uses a `turn_on_action`, to turn on the TV using a magic wake on
+LAN packet. This example requires the [Wake on LAN](/integrations/wake_on_lan)
+integration to be set up.
 
 ```yaml
 # Example turn_on_action configuration.yaml entry with Wake-on-LAN
@@ -133,6 +138,7 @@ The list with all known valid keys can be found [here](https://github.com/floria
 - TX-50DX700B
 - TX-55ASM655
 - TX-55ASW654
+- TX-55CS630E (can't power on)
 - TX-55CX680B
 - TX-55CX700E
 - TX-55EXW584
